@@ -1,0 +1,47 @@
+<style>
+	#include("/css/TableCF.css")
+</style>
+<script>
+	#include("/js/CustomFieldTable.js")
+
+
+	AJS.$(document).ready(function(){
+		AJS.$(document).on('click', '.tabs-menu > li', function(){
+			checkContainer('view', null, 1);
+		});
+		checkContainer('view', null, 1);
+	});
+
+
+	JIRA.one(JIRA.Events.NEW_CONTENT_ADDED, function (e, context, reason) {
+		//console.log("==> Context: " + context);
+		//console.log("==> Reason: " + reason);
+		//issue-search - class   -- #stalker.issue-header
+   		checkContainer('view', null, 2);
+	});
+
+	
+	
+	//AJS.$(document).bind('dialogContentReady', function(event, dialog) {
+	//	checkContainer('view', 2);
+    //});
+//</script>
+
+<div id="tableContainer">
+	<table>
+		<tr data-id="0">
+			<th >Nr.</th>
+			<th>Detaliu suma impact financiar</th>
+			<th >Tip Impact Financiar</th>
+			<th>Statut Suma</th>
+			<th>Data contabilizare</th>
+			<th>Suma impact financiar</th>
+			<th>Valuta</th>
+			<th>Data</th>
+		</tr>
+	</table>
+	<textarea class="tableHiddenTA1" style="display: none" name="$customField.id" id="$customField.id" >$!value</textarea>
+</div>
+
+##a adus laptopul(|)prov(|)1(|)3.13(|)ron(|)02/12/2012(,)a adus laptopul(|)prov(|)1(|)3.13(|)ron(|)02/12/2016
+##$!value

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="CustomFieldTable"/>
+  <!-- add our web resources -->
+  <web-resource key="CustomFieldTable-resources" name="CustomFieldTable Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="CustomFieldTable.css" location="/css/CustomFieldTable.css"/>
+    <resource type="download" name="TableCF.css" location="/css/TableCF.css"/>
+    <resource type="download" name="TableCF_edit.css" location="/css/TableCF_edit.css"/>
+    <resource type="download" name="CustomFieldTable.js" location="/js/CustomFieldTable.js"/>
+    <resource type="download" name="JQuery.js" location="/js/JQuery.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>CustomFieldTable</context>
+  </web-resource>
+  <customfield-type name="Custom Field Table" i18n-name-key="custom-field-table.name" key="custom-field-table" class="ro.etss.jira.plugin.jira.customfields.CustomFieldTable">
+    <description key="custom-field-table.description">Custom Field Table</description>
+    <resource name="view" type="velocity" location="/templates/customfields/custom-field-table/view.vm"/>
+    <resource name="edit" type="velocity" location="/templates/customfields/custom-field-table/edit.vm"/>
+  </customfield-type>
+  <customfield-type name="CF Table 2" i18n-name-key="cf-table-2.name" key="cf-table-2" class="ro.etss.jira.plugin.jira.customfields.CFTable2">
+    <description key="cf-table-2.description">The CF Table 2 Plugin</description>
+    <resource name="view" type="velocity" location="/templates/customfields/cf-table-2/view.vm"/>
+    <resource name="edit" type="velocity" location="/templates/customfields/cf-table-2/edit.vm"/>
+  </customfield-type>
+</atlassian-plugin>
