@@ -2,7 +2,7 @@
 
 //When "main container" is null it means that the item is searched in entire document when is != null then searching is made on popup window
 function checkContainer(type, mainContainer, iter){
-	var container;//tabel
+	var container;
 	var isVisible1=false, isVisible2=false ;
 	var mainContainerCP = mainContainer;
 		
@@ -49,11 +49,11 @@ function checkContainer(type, mainContainer, iter){
 				break;	
 		}
 	}else{
-		var elem1_row = AJS.$('tr', elem_1); //editable element 1 from current row
-		var elem2_row = AJS.$('tr', elem_2);//editable element 2 from current row
+		var elem1_row = AJS.$('tr', elem_1); 
+		var elem2_row = AJS.$('tr', elem_2);
 
-		if(AJS.$('th', elem1_row).length != 0 || AJS.$('th', elem2_row).length != 0 ){
-			if(AJS.$('td', elem1_row).length == 0 && AJS.$('td', elem2_row).length == 0 ){
+		if(AJS.$('th', elem1_row).length != 0 || AJS.$('th', elem2_row).length != 0){
+			if(AJS.$('td', elem1_row).length == 0 && AJS.$('td', elem2_row).length == 0){
 				console.log("Container timeout...");
 				setTimeout(function(){
 					if(iter > 0){
@@ -77,10 +77,7 @@ function checkContainer(type, mainContainer, iter){
 				}, 1000);
 		}
 	}
-	
 }
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 var sumType = {"prov":"Pierdere", "recup":"Castig"};
 var statSumNames = ['Contabilizat in pierdere castig', 'Provizion', 'Estimat', 'Pierdere de PNB nerecuperabila', 'Recuperare din asigurari contabilizata',
@@ -88,24 +85,16 @@ var statSumNames = ['Contabilizat in pierdere castig', 'Provizion', 'Estimat', '
 
 
 function parseInput(container){
-	console.log('+++++++++++++++++++++INSIDE parseInput function+++++++++++++++++++++');
 	var input = container.find('textarea.tableHiddenTA1').text();
-	console.log('===>INSIDE table function, input='+input);
 	var table$ = container.find('table');
-	console.log('===>INSIDE table function, table$='+table$);
 	var valuesNr = table$.find('th').length - 1;
-	console.log('===>INSIDE table function, valuesNr='+valuesNr);
 	var elemArr = input.split("(,)");
-	console.log('===>INSIDE table function, elemArr='+elemArr);
 
 	if(input.length != 0){	
 		elemArr.forEach(function(elem){
 			var rowElemsArr = elem.split("(|)");
-			console.log("rowElemsArr",rowElemsArr);
 			var lastRowID = Number(table$.find('tr:last-of-type').data('id')) + 1;
-			console.log("lastRowID",lastRowID);
 			var row$ = AJS.$('<tr/>').data('id', lastRowID);
-			console.log("row$",row$);
 			row$.append( AJS.$('<td/>').text(lastRowID) );
 			
 			for(var idx=0; idx < valuesNr; idx++){

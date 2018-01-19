@@ -1,1 +1,50 @@
-<h1>view.vm</h1>
+<style>
+	#include("/css/TableCF.css")
+</style>
+<script>
+	#include("/js/CFTable2.js")
+
+
+	AJS.$(document).ready(function(){
+	console.log("++++++AJS.$(document).ready(function()-VIEW++++++");
+		AJS.$(document).on('click', '.tabs-menu > li', function(){
+			checkContainer('view', null, 1);
+		});
+		checkContainer('view', null, 1);
+		console.log("++++++AJS.$(document).ready(function() END-VIEW++++++");
+	});
+
+
+	JIRA.one(JIRA.Events.NEW_CONTENT_ADDED, function (e, context, reason) {
+		console.log("++++++JIRA.one-VIEW++++++");
+		console.log("==> e: ",e);
+		console.log("==> Context: " ,context);
+		console.log("==> Reason: ", reason);
+		//issue-search - class   -- #stalker.issue-header
+   		checkContainer('view', null, 2);
+   		console.log("++++++JIRA.one END-VIEW++++++");
+	});
+</script>
+
+<div id="tableContainer2">
+	<table>
+		<tr data-id="0">
+			<th >Nr.</th>
+			<th>Suma</th>
+			<th>Tip de suma</th>
+			<th>Data incasarii</th>
+			<!--
+				<th>Statut Suma</th>
+				<th>Data contabilizare</th>
+				<th>Suma impact financiar</th>
+				<th>Valuta</th>
+				<th>Data</th>
+			-->
+		</tr>
+	</table>
+	<textarea class="tableHidden_TA1" style="display: none" name="$customField.id" id="$customField.id" >$!value</textarea>
+</div>
+<!-- to be removed -->
+<br/>
+<br/>
+<br/>

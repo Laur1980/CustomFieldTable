@@ -1,1 +1,34 @@
-<h1>edit.vm</h1>
+<style>
+	#include("/css/TableCF_edit.css")
+</style>
+<script>
+	#include("/js/CFTable2.js")
+	AJS.$(document).ready(function(){
+		AJS.$(document).on('click', '.tabs-menu > li', function(){
+			checkContainer('edit', null, 1);
+		});
+		checkContainer('edit', null, 2);
+	});
+</script>
+<table class="customTable2">
+	<tr data-id="0">
+		<th>Nr.</th>
+		<th>Suma</th>
+		<th>Tip de suma</th>
+		<th>Data incasarii</th>
+		<!--
+			<th>Statut suma</th>
+			<th>Data contabilizare</th>
+			<th id="suma_edit">Suma impact financiar</th>
+			<th>Valuta</th>
+			<th>Data</th>
+		-->
+		<th>
+		</th>
+	</tr>
+</table>
+<textarea class="tableHidden_TA2" style="display: none" name="$customField.id" id="$customField.id">$!value</textarea>
+<!-- to be removed -->
+<br/>
+<br/>
+<br/>

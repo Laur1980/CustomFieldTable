@@ -25,11 +25,38 @@ div#tableContainer tr:nth-child(odd){
 	background-color: #f2f2f2;	
 } 
 
+div#tableContainer2 tr:nth-child(odd){
+	background-color: #f2f2f2;	
+} 
+
 .finalRows{
 	background-color: #bfbfbf;
 }
 
 div#tableContainer table, div#tableContainer th, div#tableContainer td{
 	border: 1px solid black;
+}
+
+div#tableContainer2 table, div#tableContainer2 th, div#tableContainer2 td{
+	border: 1px solid black;
+}
+
+div#tableContainer2 {
+	min-width: 200px;
+	overflow: auto;
+}
+
+div#tableContainer2 table{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+div#tableContainer2 th{
+	background-color: #bfbfbf;		
+}
+
+div#tableContainer2 th, div#tableContainer2 td{
+	text-align: center;
+	width: 1%;
 }
 

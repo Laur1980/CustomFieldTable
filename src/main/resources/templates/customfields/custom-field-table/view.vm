@@ -4,7 +4,6 @@
 <script>
 	#include("/js/CustomFieldTable.js")
 
-
 	AJS.$(document).ready(function(){
 		AJS.$(document).on('click', '.tabs-menu > li', function(){
 			checkContainer('view', null, 1);

@@ -17,10 +17,11 @@
     <resource type="download" name="TableCF.css" location="/css/TableCF.css"/>
     <resource type="download" name="TableCF_edit.css" location="/css/TableCF_edit.css"/>
     <resource type="download" name="CustomFieldTable.js" location="/js/CustomFieldTable.js"/>
-    <resource type="download" name="JQuery.js" location="/js/JQuery.js"/>
+    <resource type="download" name="CFTable2.js" location="/js/CFTable2.js"/>
     <resource type="download" name="images/" location="/images"/>
     <context>CustomFieldTable</context>
   </web-resource>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CF++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
   <customfield-type name="Custom Field Table" i18n-name-key="custom-field-table.name" key="custom-field-table" class="ro.etss.jira.plugin.jira.customfields.CustomFieldTable">
     <description key="custom-field-table.description">Custom Field Table</description>
     <resource name="view" type="velocity" location="/templates/customfields/custom-field-table/view.vm"/>
@@ -31,4 +32,5 @@
     <resource name="view" type="velocity" location="/templates/customfields/cf-table-2/view.vm"/>
     <resource name="edit" type="velocity" location="/templates/customfields/cf-table-2/edit.vm"/>
   </customfield-type>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CF++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 </atlassian-plugin>

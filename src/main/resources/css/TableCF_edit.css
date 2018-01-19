@@ -6,7 +6,7 @@ table.customTable{
 table.customTable th{
 	background-color: #bfbfbf;	
 	width: 1%;
-} 
+}  
 
 table.customTable tr:nth-child(odd){
 	background-color: #f2f2f2;	
@@ -19,7 +19,6 @@ table.customTable, table.customTable th, table.customTable td{
 table.customTable th, table.customTable td{
 	text-align: center;
 }
-
 
 #suma_edit{
 	width: 50px;
@@ -39,4 +38,30 @@ table.customTable th, table.customTable td{
 
 .addBtn:hover{
 	background-color: rgba(0, 153, 0, 0.7);
+}
+
+table.customTable2, table.customTable2 th, table.customTable2 td{
+	border: 1px solid black;
+}
+
+table.customTable2{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.customTable2 th{
+	background-color: #bfbfbf;	
+	width: 1%;
+}
+
+table.customTable2 tr:nth-child(odd){
+	background-color: #f2f2f2;	
+}
+
+table.customTable2 th, table.customTable2 td{
+	text-align: center;
+}
+
+#suma_edit2{
+	width: 50px;
 }

@@ -11,6 +11,10 @@
 		checkContainer('edit', null, 2);
 	});
 
+	//AJS.$(document).bind('dialogContentReady', function(event, dialog) {
+	//	checkContainer('edit', AJS.$(dialog.$form, 3));
+    //});
+
 </script>
 
 <table class="customTable">
