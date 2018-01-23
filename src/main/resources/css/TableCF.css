@@ -1,46 +1,3 @@
-div#tableContainer {
-	min-width: 200px;
-	overflow: auto;
-}
-
-div#tableContainer table{
-	border-collapse: collapse;
-	width: 100%;
-}
-
-div#tableContainer th{
-	background-color: #bfbfbf;		
-} 
-
-div#tableContainer th, div#tableContainer td{
-	text-align: center;
-	width: 1%;
-}
-
-#suma_view{
-	width: 50px;
-}
-
-div#tableContainer tr:nth-child(odd){
-	background-color: #f2f2f2;	
-} 
-
-div#tableContainer2 tr:nth-child(odd){
-	background-color: #f2f2f2;	
-} 
-
-.finalRows{
-	background-color: #bfbfbf;
-}
-
-div#tableContainer table, div#tableContainer th, div#tableContainer td{
-	border: 1px solid black;
-}
-
-div#tableContainer2 table, div#tableContainer2 th, div#tableContainer2 td{
-	border: 1px solid black;
-}
-
 div#tableContainer2 {
 	min-width: 200px;
 	overflow: auto;
@@ -53,10 +10,33 @@ div#tableContainer2 table{
 
 div#tableContainer2 th{
 	background-color: #bfbfbf;		
-}
+} 
 
 div#tableContainer2 th, div#tableContainer2 td{
 	text-align: center;
 	width: 1%;
 }
 
+#suma_view{
+	width: 50px;
+}
+/*
+div#tableContainer2 tr:nth-child(odd){
+	background-color: #f2f2f2;	
+} 
+*/
+.finalRows{
+	background-color: #bfbfbf;
+}
+
+.lossRow {
+	background-color: red;
+}
+
+.profitRow {
+	background-color: chartreuse;
+}
+
+div#tableContainer2 table, div#tableContainer2 th, div#tableContainer2 td{
+	border: 1px solid black;
+}

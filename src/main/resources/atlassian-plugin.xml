@@ -22,11 +22,13 @@
     <context>CustomFieldTable</context>
   </web-resource>
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CF++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!--  
   <customfield-type name="Custom Field Table" i18n-name-key="custom-field-table.name" key="custom-field-table" class="ro.etss.jira.plugin.jira.customfields.CustomFieldTable">
     <description key="custom-field-table.description">Custom Field Table</description>
     <resource name="view" type="velocity" location="/templates/customfields/custom-field-table/view.vm"/>
     <resource name="edit" type="velocity" location="/templates/customfields/custom-field-table/edit.vm"/>
   </customfield-type>
+  -->
   <customfield-type name="CF Table 2" i18n-name-key="cf-table-2.name" key="cf-table-2" class="ro.etss.jira.plugin.jira.customfields.CFTable2">
     <description key="cf-table-2.description">The CF Table 2 Plugin</description>
     <resource name="view" type="velocity" location="/templates/customfields/cf-table-2/view.vm"/>

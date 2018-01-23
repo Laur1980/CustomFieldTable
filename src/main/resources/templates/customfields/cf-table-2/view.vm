@@ -33,18 +33,7 @@
 			<th>Suma</th>
 			<th>Tip de suma</th>
 			<th>Data incasarii</th>
-			<!--
-				<th>Statut Suma</th>
-				<th>Data contabilizare</th>
-				<th>Suma impact financiar</th>
-				<th>Valuta</th>
-				<th>Data</th>
-			-->
 		</tr>
 	</table>
 	<textarea class="tableHidden_TA1" style="display: none" name="$customField.id" id="$customField.id" >$!value</textarea>
 </div>
-<!-- to be removed -->
-<br/>
-<br/>
-<br/>

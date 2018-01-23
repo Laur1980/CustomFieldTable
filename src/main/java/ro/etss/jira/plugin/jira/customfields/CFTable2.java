@@ -33,19 +33,26 @@ public class CFTable2 extends AbstractSingleFieldType<String> implements Project
     @Override
 	public Map<String, Object> getVelocityParameters(Issue issue, CustomField field, FieldLayoutItem fieldLayoutItem) {
 		Map<String, Object> velocityParameters = super.getVelocityParameters(issue, field, fieldLayoutItem);
-		log.info("++++++++++++++++++++getVelocityParameters++++++++++++++++++++");
+		log.info("\n\n++++++++++++++++++++INSIDE getVelocityParameters++++++++++++++++++++\n\n");
+		log.info("Parameters: \n\n");
+		for(String s:velocityParameters.keySet())log.info(s+"\n\n");
+		log.info("\n\n++++++++++++++++++++END getVelocityParameters++++++++++++++++++++\n\n");
 		return velocityParameters;
 	}
 
 	@Override
 	public String getSingularObjectFromString(String arg0) throws FieldValidationException {
-		log.info("++++++++++++++++++++getSingularObjectFromString++++++++++++++++++++");
+		log.info("\n\n++++++++++++++++++++INSIDE getSingularObjectFromString++++++++++++++++++++\n\n");
+		log.info(arg0);
+		log.info("\n\n++++++++++++++++++++END getSingularObjectFromString++++++++++++++++++++\n\n");
 		return arg0;
 	}
 
 	@Override
 	public String getStringFromSingularObject(String arg0) {
-		log.info("++++++++++++++++++++getStringFromSingularObject++++++++++++++++++++");
+		log.info("\n\n++++++++++++++++++++INSIDE getStringFromSingularObject++++++++++++++++++++\n\n");
+		log.info(arg0);
+		log.info("\n\n++++++++++++++++++++END getStringFromSingularObject++++++++++++++++++++\n\n");
 		return arg0;
 	}
 
@@ -63,13 +70,17 @@ public class CFTable2 extends AbstractSingleFieldType<String> implements Project
 
 	@Override
 	protected Object getDbValueFromObject(String arg0) {
-		log.info("++++++++++++++++++++getDbValueFromObject++++++++++++++++++++");
+		log.info("\n\n++++++++++++++++++++INSIDE getDbValueFromObject++++++++++++++++++++\n\n");
+		log.info(arg0);
+		log.info("\n\n++++++++++++++++++++END getDbValueFromObject++++++++++++++++++++\n\n");
 		return arg0;
 	}
 
 	@Override
 	protected String getObjectFromDbValue(Object arg0) throws FieldValidationException {
-		log.info("++++++++++++++++++++getObjectFromDbValue++++++++++++++++++++");
+		log.info("\n\n++++++++++++++++++++INSIDE getObjectFromDbValue++++++++++++++++++++\n\n");
+		log.info(arg0.toString());
+		log.info("\n\n++++++++++++++++++++END getObjectFromDbValue++++++++++++++++++++\n\n");
 		return arg0.toString();
 	}
 }

@@ -9,6 +9,7 @@ function checkContainer(type, mainContainer, iter){
 	var isVisible2=false;
 	var mainContainerCP = mainContainer;
 	var elem1, elem1;
+	
 	 if(mainContainer != null){
 	 	console.log("==> Search in Popup");
 	 	elem_1 = mainContainer.find('div#tableContainer2');
@@ -46,6 +47,7 @@ function checkContainer(type, mainContainer, iter){
 			switch(type){
 				case'view':console.log("=======> if2, view case");
 										//parcurgere input 
+									parseInput(container);
 									break;
 				default:console.log("=======> if2, edit case");
 								//parcurgere input si editare
@@ -97,16 +99,62 @@ function checkContainer(type, mainContainer, iter){
 	
 	console.log("++++++GETTING OUT OF  checkContainer++++++");
 }
+//parsing input for the view mode
+function parseInput(container){
+console.log("+++++++++++++++INSIDE parseInput+++++++++++++++");
+	var input = container.find('textarea.tableHidden_TA1').text();
+	var table = container.find('table');
+	console.log("\n\n\n\n\n\n");
+	console.log("===>table: ",table);
+	console.log("\n\n\n\n\n\n");
+	var valuesNr = table.find('th').length-1;
+	console.log("===>valuesNr=",valuesNr);
+	var elementArray = input.split("(,)");
+	var arrayLength =  elementArray.length;
+	console.log("===>input",input);
+	
+	if(arrayLength != 0){
+		
+		elementArray.forEach(
+				function(element){
+					var rowElementsArray = element.split("(|)");
+					var lastRowId = Number(table.find('tr:last-of-type').data('id'))+1;
+					var row = AJS.$('<tr/>').data('id',lastRowId);
+					row.append(AJS.$('<td/>').text(lastRowId));
+					var index=0;
+					var rowElementsArrayLength = rowElementsArray.length;
+					console.log("====>rowElementsArray",rowElementsArray);
+					for(; index<rowElementsArrayLength;index++){
+						//+++++++++++++++AICI+++++++++++++++
+						switch(index){
+						 	//suma
+							case 0:row.append( AJS.$('<td/>').text( getNumberFromStr(rowElementsArray[index] ) ) );	
+										  break;
+										  //anything else
+							default:row.append(AJS.$('<td/>').text(pretifyString(rowElementsArray[index])));
+						}
+						
+					}
+					//decide the color of the row
+					console.log("===>rowElementsArray[1]=",rowElementsArray[1]);
+					row = rowElementsArray[1] === 'Pierdere'?row.addClass('lossRow'):row.addClass('profitRow');
+					console.log("===>row",row);
+					table.append(row);
+				}
+		);
+	}
+	console.log("+++++++++++++++END parseInput+++++++++++++++");
+}
 
-var tipDeSuma = {"p":"Pieredere","c":"Castig" };
-var numeTipDeSuma = ['Pieredere',"Castig" ];
+var tipDeSuma = {"p":"Pierdere","c":"Castig" };
+var numeTipDeSuma = ['Pierdere',"Castig" ];
 
 function parseTableAndEditTable(container){
 	
 	console.log("++++++parseTableAndEditTable++++++");
 	var  rowTemplate=[
-													{"type":"text","name":"Suma"},
-													{"type":"select","name":"Tip de suma", "value":"pierdere|castig"},
+													{"type":"text","name":"suma"},
+													{"type":"select","name":"Tip de suma", "value":"p|c","tipDeSuma":tipDeSuma},
 													{"type":"date","name":"date"}
 											];
 	var input = AJS.$('textarea.tableHidden_TA2');
@@ -122,7 +170,7 @@ function parseTableAndEditTable(container){
 		if(typeof rowInput != "undefined" && rowInput != ""){
 			
 			elemArr = rowInput.split("(,)");
-			console.log('==>elemArr: ',elemArr);
+
 			//parsing
 			elemArr.forEach(
 													function (elem){
@@ -137,11 +185,12 @@ function parseTableAndEditTable(container){
 														
 														for(i = 0;i<numberForRow;i++){
 															switch(i){
-																case 1:rowElem.append(AJS.$('<td/>').text(getNumberFromStr(elemArr[i])));break;
-																case 2:rowElem.append(AJS.$('<td/>').text(numeTipDeSuma[elemArr[i]]));break;
-																default:rowElem.append(AJS.$('<td/>').text(pretifyString(elemArr[i])));
+																case 0:rowElem.append(AJS.$('<td/>').text(getNumberFromStr(rowElementsArr[i])));break;
+																default:rowElem.append(AJS.$('<td/>').text(pretifyString(rowElementsArr[i])));
 															}
 														}
+														//adding row color class
+														rowElem = rowElementsArr[1] === 'Pierdere'?rowElem.addClass('lossRow'):rowElem.addClass('profitRow');
 														var minusSignCell = AJS.$('<td/>').append( AJS.$('<p/>')
 																																	.text("Del.").prop('title','Stergere linie')
 																																	.addClass('closeBtn').css({"cursor": "pointer"})
@@ -158,65 +207,48 @@ function parseTableAndEditTable(container){
 		
 		for(j =0;j<numberForRow;j++){
 				
-			var cellElement = AJS.$('<td/>');
-			var inputElement ;
-			
-			if(rowTemplate[j].type == "text"){
+				var cellElement = AJS.$('<td/>');
+				var inputElementent ;
 				
-						inputElement = AJS.$('<input/>', {'type':'text', 'name': rowTemplate[j].name});
-						if(rowTemplate[j].name == "suma"){
-							inputElement.css('width', '50px');
-						}
-						
-			}else if(rowTemplate[j].type == "date"){
-					var currDate = new Date();
-					var currMonth = currDate.getMonth();
-					var currDay = currDate.getDate();
-					var currYear = currDate.getFullYear();
-					var newDateVal = ('0'+currDay).slice(-2)+"/"+('0'+(currMonth+1)).slice(-2)+"/"+currYear;
+				if(rowTemplate[j].type =="text"){
+							inputElementent = AJS.$('<input/>', {'type':'text', 'name': rowTemplate[j].name});
+							if(rowTemplate[j].name == "suma"){
+								inputElementent.css('width', '90%');
+							}
+							
+				}else if(rowTemplate[j].type == "date"){//populating the date column
 					
-					inputElem = AJS.$('<input/>', {'type': 'text', 'name': rowTemplate[j].name, 'value': newDateVal});
-					inputElem.css({'text-align':'center', 'width':'100px'});
-			}else{
+						var currDate = new Date();
+						var currMonth = currDate.getMonth();
+						var currDay = currDate.getDate();
+						var currYear = currDate.getFullYear();
+						var newDateVal = ('0'+currDay).slice(-2)+"/"+('0'+(currMonth+1)).slice(-2)+"/"+currYear;
+						inputElementent = AJS.$('<input/>', {'type': 'text', 'name': rowTemplate[j].name, 'value': newDateVal});
+						inputElementent.css({'text-align':'center', 'width':'100px'});
 				
-				inputElement = AJS.$('<select/>', {'name':rowTemplate[j].name});
-				rowTemplate[j]['value'].split("|").forEach(
-																											function(elem, index){
-																																		var option, value;
-																																			if(index == 0){
+				}else if(rowTemplate[j].type == "select"){		// populating the select column
+					inputElementent = AJS.$('<select/>', {'name':rowTemplate[j].name});
+					rowTemplate[j]['value'].split("|").forEach(
+																												function(elem, index){
+																																			var option, value;
+																																				if(index == 0){
+																																								value = rowTemplate[j]['tipDeSuma'][elem];
+																																								option = AJS.$('<option/>', {'value':value, 'selected': 'selected'}).text( value );	
+																																				}else{
+																																									value = rowTemplate[j]['tipDeSuma'][elem];
+																																									option = AJS.$('<option/>', {'value':value}).text( value );
+																																				}
 																																				
-																																					//???
-																																						if(rowTemplate[j].hasOwnProperty('sumType')){
-																																							value = rowTemplate[j]['sumType'][elem];
-																																						}else{ 
-																																							value = pretifyString(elem);
-																																						}
-																																							
-																																						if(rowTemplate[j].name == "Tip de suma"){
-																																							console.log('===>Tip de suma: ', rowTemplate[j].name);
-																																							option = AJS.$('<option/>', {'value':elem, 'selected': 'selected'}).text( numeTipDeSuma[value] );
-																																						} else {
-																																							option = AJS.$('<option/>', {'value':elem, 'selected': 'selected'}).text( value );
-																																						}
-																														
-																																			}else{
-																																							//++++ Continue HERE+++++
-																																							//???
-																																							if(rowTemplate[j].hasOwnProperty('sumType')){
-																																								value = rowTemplate[j]['sumType'][elem];
-																																							}else{
-																																							   value = pretifyString(elem);
-																																							}
-																																			}
-																																			inputElement.append(option);
-																											
-																									});
+																																				inputElementent.append(option);
+																												
+																										});
 			}
-			tempInputRow.append( cellElement.append(inputElement) );
+			tempInputRow.append( cellElement.append(inputElementent) );
 		}
 		tempInputRow.append( AJS.$('<td/>')
-				.append( AJS.$('<p/>').text('Ad.').prop('title', 'Adauga linie')
-				.addClass('addBtn').css("cursor", "pointer").bind("click", {'table': table, 'row': tempInputRow, 'input': input}, makeRow) ) );
+										.append( AJS.$('<p/>').text('Ad.').prop('title', 'Adauga linie')
+										.addClass('addBtn').css("cursor", "pointer")
+										.bind("click", {'table': table, 'row': tempInputRow, 'input': input}, makeRow) ) );
 		table.append(tempInputRow);
 	
 }
@@ -226,18 +258,18 @@ function deleteRow(event){
 	var table = event.data['table'];
 	console.log("==>table object",table);
 	var row = event.data['row'];
-	var inputElem = event.data['input'];
+	var inputElement = event.data['input'];
 	
 	var rowID = Number(row.data('id'));
 	
-	var splittedArr = inputElem.text.split("(,)");
+	var splittedArr = inputElement.text().split("(,)");
 	
 	var newValue = "";
 	if(splittedArr.length != 1){
 		splittedArr.splice(rowID-1, 1);
 		newValue = splittedArr.join('(,)'); 
 	}
-	inputElem.text( newValue );
+	inputElement.text( newValue );
 
 	row.remove();
 	console.log('++++++++END deleteRow++++++++');
@@ -251,8 +283,8 @@ function makeRow(event){
 	console.log('==>lastRowID: ',lastRowID);
 	var row = event.data['row'];
 	console.log('==>row: ',row);
-	var inputElem = event.data['input'];
-	console.log('==>inputElem: ',inputElem);
+	var inputElement = event.data['input'];
+	console.log('==>inputElement: ',inputElement);
 	var nrOfCol = table.find('th').length - 2;
 	console.log('==>nrOfCol: ',nrOfCol);
 	var elements = [];
@@ -266,40 +298,34 @@ function makeRow(event){
 	for(k = 1;k<=nrOfCol;k++){
 			var inputTemp = AJS.$('td', row).eq(k).find('input');
 			inputValHolder = "";
+			
 			if(inputTemp.length == 0){
 					 inputTemp = AJS.$('td',row).eq(k).find('select');
 					//numeTipDeSuma
-					 if(numeTipDeSuma.hasOwnProperty(inputTemp.val())){
-						 newRow$.append( AJS.$('<td/>').text(sumType[inputTemp.val()] ) );
-						 inputValHolder = inputTemp.val();								 
-					 }else{
-						 newRow.append( AJS.$('<td/>').text( pretifyString(inputTemp.val()) ) );
-						 inputValHolder = inputTemp.val();
-					 }
+					 newRow.append( AJS.$('<td/>').text( pretifyString(inputTemp.val()) ) );
+					 inputValHolder = inputTemp.val();
+					 console.log("\n\n==>inputValHolder =",inputValHolder);
+					 //determins the color of the row
+					 inputValHolder == 'Pierdere' ?newRow.addClass('lossRow'):newRow.addClass('profitRow');
 			}else{
+
 				if(k == 3){ // date column
 						var tempVal = inputTemp.val();
 						if(tempVal.trim().length == 0){
-							inputTemp.val('').addClass('wrongInput')
-																	 .bind('click', function (){
-																		 														AJS.$(this).removeClass('wrongInput'); 
-																	});
+							wrongInput(inputTemp);
 							return;
 						}else{
 								//formating data
-								var dateArray = tempVal.split('/');
+								var dateArray= tempVal.split('/');
 								if(dateArray.length != 3){
-									inputTemp.val('').addClass('wrongInput')
-																		  .bind('click', function (){
-																			 														AJS.$(this).removeClass('wrongInput'); 
-																		 	});
-											return;
+									wrongInput(inputTemp);
+									return;
 								}
 								
 								var isValidDate = true;
-								var tempDay = Number(dateArr[0]);
-								var tempMonth =  Number(dateArr[1]);
-								var tempYear = Number(dateArr[2]);
+								var tempDay = Number(dateArray[0]);
+								var tempMonth =  Number(dateArray[1]);
+								var tempYear = Number(dateArray[2]);
 								var inputDate = new Date(tempYear, tempMonth-1, tempDay);
 								if(typeof tempDay == "undefined" || typeof tempMonth == "undefined" || typeof tempYear == "undefined"){
 									isValidDate = false;
@@ -307,16 +333,13 @@ function makeRow(event){
 									isValidDate = false;
 								}else if(tempDay <= 0 || tempDay > 31){//Day verify
 									isValidDate = false;
-								}else if(tempYear > new Date().getFullYear()){ //if year is in future
+								}else if(tempYear > new Date().getFullYear() || tempYear<1900){ //if year is in future or less than 1900
 									isValidDate = false;
 								}else if(inputDate > new Date()){ //If current date is lower then input date then -> error
 									isValidDate = false;
 								}
 								if(isValidDate == false){
-									iinputTemp.val('').addClass('wrongInput')
-									  .bind('click', function (){
-																								AJS.$(this).removeClass('wrongInput'); 
-																					  		});
+									wrongInput(inputTemp);
 									return;			
 								}else{
 									tempVal =  ('0' + inputDate.getDate()).slice(-2) +"/"+ ('0' + (inputDate.getMonth()+1)).slice(-2) +"/"+ inputDate.getFullYear(); 
@@ -330,7 +353,7 @@ function makeRow(event){
 				}else if(k == 1){
 					appendedVal = getNumberFromStr(inputTemp.val());
 					if(appendedVal == 0){
-						inputTemp.val('').addClass('wrongInput').bind('click', function (){ AJS.$(this).removeClass('wrongInput'); });
+						wrongInput(inputTemp);
 						return;
 					}
 				inputValHolder = appendedVal;
@@ -340,8 +363,12 @@ function makeRow(event){
 	elements.push( inputValHolder );
 	console.log('++++++++END makeRow++++++++');
 	}
-	newRow.append( AJS.$('<td/>').append( AJS.$('<p/>').text('Del.').prop('title', 'Stergere linie').addClass('closeBtn').css("cursor", "pointer").bind('click', {'table':table, 'row': newRow$, 'input': inputElem$}, deleteRow) ));
-
+	
+	newRow.append( AJS.$('<td/>').append( AJS.$('<p/>')
+																		  .text('Del.').prop('title', 'Stergere linie')
+																		  .addClass('closeBtn')
+																		  .css("cursor", "pointer")
+																		  .bind('click', {'table':table, 'row': newRow, 'input': inputElement}, deleteRow) ));
 	table.find('tr.inputRow').before( newRow );
 	
 	row.find('input').val('');
@@ -356,11 +383,20 @@ function makeRow(event){
 		AJS.$(this).val( AJS.$(this).find('option:first').val() );
 	});
 
-	if(inputElem.text().length != 0){
-		inputElem.text(inputElem.text()+ "(,)" + elements.join("(|)"));
+	if(inputElement.text().length != 0){
+		inputElement.text(inputElement.text()+ "(,)" + elements.join("(|)"));
 	}else{
-		inputElem.text(elements.join('(|)'));
+		inputElement.text(elements.join('(|)'));
 	}
+}
+
+function wrongInput(inputTemp){
+	console.log("++++INSIDE wrongInput ++++");
+	inputTemp.val('').addClass('wrongInput')
+										  .bind('click', function (){
+											 														AJS.$(this).removeClass('wrongInput'); 				 														
+										 	});
+	console.log("++++END wrongInput ++++");
 }
 
 function getNumberFromStr(str){
