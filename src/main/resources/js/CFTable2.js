@@ -1,9 +1,6 @@
 
 function checkContainer(type, mainContainer, iter){
-	console.log("++++++INSIDE checkContainer++++++");
-	console.log("==========> type: ",type);
-	console.log("==========> mainContainer: ",mainContainer);
-	console.log("==========> iter: ",iter);
+	
 	var container; //table
 	var isVisible1=false;
 	var isVisible2=false;
@@ -58,16 +55,10 @@ function checkContainer(type, mainContainer, iter){
 		console.log("===>Container IS NOT visible");
 		var elem1_row = AJS.$('tr', elem_1); //editable element 1 from current row
 		var elem2_row = AJS.$('tr', elem_2);//editable element 2 from current row
-		console.log("===>elem1_row", elem1_row);
-		console.log("===>elem2_row", elem2_row);
 		var lenTh1 =  AJS.$('th',elem1_row ).length;
 		var lenTh2 =  AJS.$('th',elem2_row ).length;
-		console.log("===>lenTh1", lenTh1);
-		console.log("===>lenTh2", lenTh2);
 		var lenTd1 =  AJS.$('td',elem1_row ).length;
 		var lenTd2 =  AJS.$('td',elem2_row ).length;
-		console.log("===>lenTd1", lenTd1);
-		console.log("===>lenTd2", lenTd2);
 		
 		if(lenTh1 != 0 || lenTh2 != 0){
 			if(lenTd1 == 0 && lenTd2 == 0){
@@ -159,11 +150,8 @@ function parseTableAndEditTable(container){
 											];
 	var input = AJS.$('textarea.tableHidden_TA2');
 	var rowInput = AJS.$('textarea.tableHidden_TA2').text();
-	console.log('==>rowInput: ',rowInput);
 	var table = container;
-	console.log('==>container: ',container);
 	var numberForRow = table.find('th').length -2 ;
-	console.log('==>numberForRow: ',numberForRow);
 	var elemArr = [];
 	var totalSum = 0;
 	

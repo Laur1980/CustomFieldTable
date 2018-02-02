@@ -35,4 +35,16 @@
     <resource name="edit" type="velocity" location="/templates/customfields/cf-table-2/edit.vm"/>
   </customfield-type>
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CF++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++ WebWork +++++++++++++++++++++++++++++++++++++++ -->
+  <webwork1 key="table-configuration-action" name="TableConfigurationAction" i18n-name-key="table-configuration-action.name">
+    <description key="table-configuration-action.description">The action for editing a table custom field</description>
+    <actions>
+      <action name="ro.etss.telekom.jira.plugin.jira.webwork.TableConfigurationAction" alias="EditTableConfig">
+        <view name="success">/templates/table-configuration-action/success.vm</view>
+        <view name="input">/templates/table-configuration-action/input.vm</view>
+        <view name="error">/templates/table-configuration-action/error.vm</view>
+      </action>
+    </actions>
+  </webwork1>
+  <!-- ++++++++++++++++++++++++++++++ WebWork +++++++++++++++++++++++++++++++++++++++ -->
 </atlassian-plugin>

@@ -1,26 +1,28 @@
 package ro.etss.jira.plugin.jira.customfields;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.atlassian.jira.issue.customfields.impl.TextCFType;
-import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
-import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
-import com.atlassian.jira.issue.customfields.persistence.PersistenceFieldType;
-import com.atlassian.jira.issue.customfields.impl.AbstractSingleFieldType;
-import com.atlassian.jira.issue.customfields.impl.FieldValidationException;
-import com.atlassian.jira.imports.project.customfield.ProjectCustomFieldImporter;
-import com.atlassian.jira.imports.project.customfield.ProjectImportableCustomField;
-import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.fields.CustomField;
-import com.atlassian.jira.issue.fields.config.FieldConfig;
-import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.atlassian.jira.imports.project.customfield.ProjectCustomFieldImporter;
+import com.atlassian.jira.imports.project.customfield.ProjectImportableCustomField;
+import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.issue.customfields.config.item.DefaultValueConfigItem;
+import com.atlassian.jira.issue.customfields.impl.AbstractSingleFieldType;
+import com.atlassian.jira.issue.customfields.impl.FieldValidationException;
+import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
+import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
+import com.atlassian.jira.issue.customfields.persistence.PersistenceFieldType;
+import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.issue.fields.config.FieldConfigItemType;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+
 public class CFTable2 extends AbstractSingleFieldType<String> implements ProjectImportableCustomField{
-    private static final Logger log = LoggerFactory.getLogger(CFTable2.class);
+    
+	private static final Logger log = LoggerFactory.getLogger(CFTable2.class);
 
     private final ProjectCustomFieldImporter projectCustomFieldImporter; 
 
@@ -29,6 +31,15 @@ public class CFTable2 extends AbstractSingleFieldType<String> implements Project
     		super(customFieldValuePersister, genericConfigManager);
     		projectCustomFieldImporter = new ProjectCustomFieldImporterImplem();
     }
+    
+    @Override
+	public List<FieldConfigItemType> getConfigurationItemTypes() {
+    	final List<FieldConfigItemType> configurationItemTypes = super.getConfigurationItemTypes();
+    	final DefaultValueConfigItem defaultValueConfigItem= new DefaultValueConfigItem();
+    	configurationItemTypes.add(new TableConfigItem());
+    	//configurationItemTypes.add(defaultValueConfigItem);
+		return configurationItemTypes;
+	}
     
     @Override
 	public Map<String, Object> getVelocityParameters(Issue issue, CustomField field, FieldLayoutItem fieldLayoutItem) {

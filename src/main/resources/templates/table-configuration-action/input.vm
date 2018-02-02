@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<title>$i18n.getText('common.words.configure')
+		$action.getCustomField().getName()</title>
+		<meta content="admin" name="decorator" />
+		<link rel="stylesheet" type="text/css" media="print"
+		href="/styles/combined-printable.css">
+		<link type="text/css" rel="StyleSheet" media="all" href="/styles/combined.css"/>
+		<style>
+			#include("/css/TableCF_edit.css")
+		</style>	
+	</head>
+	<body>
+		<h2>++++++++++++++++++++++++++INPUT++++++++++++++++++++++++++</h2><br/>
+		<script>
+			#include("/js/TelekomJiraPlugin.js")
+			AJS.$(document).ready(function(){
+				AJS.$(document).on('click', '.tabs-menu > li', function(){
+					checkContainer('edit', null, 1);
+				});
+				checkContainer('edit', null, 2);
+			});
+
+		</script>
+		<form action="EditCurrencyConfig.jspa" method="post">
+		<table class="customTable2">
+			<tr data-id="0">
+			</tr>
+		</table>
+		<textarea class="tableHidden_TA2" 
+				  style="display: none" 
+				  name="$initialValue" 
+				  id="$initialValue">$!action.getInitialValue()</textarea>
+		<input type="hidden" name="fieldConfigId" value="$fieldConfigId">
+		<input type="submit"
+			   name="SALVEAZA CONFIGURATIA"
+			   id="Save"
+			   value="$i18n.getText('common.words.done')"
+			   accesskey="S"
+		       title="Press Ctrl+S to submit form"
+		      class="spaced"/>
+	</form>
+	</body>
+</html>

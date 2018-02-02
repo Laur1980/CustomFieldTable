@@ -247,26 +247,18 @@ function deleteRow(event){
 
 	var splittedArr = inputElem$.text().split("(,)");
 
-	// splittedArr.forEach(function(elem, idx){
-	// 	console.log("Idx: " +  idx + " Val: " + elem);
-	// });
-
 	console.log("Deleting elem with index -> " + rowID);
 
 	var newVal = "";
 	if(splittedArr.length != 1){
 		splittedArr.splice(rowID-1, 1);
-		// console.log("After deletation : ");
-		// splittedArr.forEach(function(elem, idx){
-		// 	console.log("Idx: " +  idx + " Val: " + elem);
-		// });
 		newVal = splittedArr.join('(,)'); 
 	}
 	inputElem$.text( newVal );
 
 	row$.remove();
 
-	// recalcSum(table$, newVal);
+
 }
 
 function makeRow(event){
