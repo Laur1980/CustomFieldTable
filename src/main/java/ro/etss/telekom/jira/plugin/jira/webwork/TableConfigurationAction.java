@@ -13,7 +13,6 @@ import com.atlassian.jira.web.action.admin.customfields.AbstractEditConfiguratio
 import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 
-import ro.etss.telekom.jira.plugin.jira.customfields.DAO;
 @Scanned
 public class TableConfigurationAction extends AbstractEditConfigurationItemAction
 {
@@ -60,7 +59,7 @@ public class TableConfigurationAction extends AbstractEditConfigurationItemActio
 			setDefaultValue("");
 		}
 		//updating the default custom field value
-		DAO.updateStoredValue(getFieldConfig(), getDefaultValue());
+		//DAO.updateStoredValue(getFieldConfig(), getDefaultValue());
 		
 		String save = getHttpRequest().getParameter("Save");
 		

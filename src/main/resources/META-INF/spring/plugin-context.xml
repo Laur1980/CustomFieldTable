@@ -7,4 +7,10 @@
         http://www.atlassian.com/schema/atlassian-scanner
         http://www.atlassian.com/schema/atlassian-scanner/atlassian-scanner.xsd">
     <atlassian-scanner:scan-indexes/>
+    <bean name="assigneeServiceImpl" 
+    	  class="ro.etss.jira.plugin.jira.reports.service.AssigneeServiceImpl" />
+	<!--  
+	    <osgi:service id="assigneeService" ref="assigneeServiceImpl"
+	  		interface="ro.etss.jira.plugin.jira.reports.service.AssigneeService"/>
+  	-->
 </beans>

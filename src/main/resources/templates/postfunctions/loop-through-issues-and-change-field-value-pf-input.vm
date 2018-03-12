@@ -1,0 +1,33 @@
+
+<tr>
+    <td class="fieldLabelArea">
+        Select the  issue type:
+    </td>
+    <td nowrap>
+        <select name="selectedIssueType" id="selectedIssueType" >
+        	#foreach($i in $issueTypes)
+        		<option value="${i.id}"
+        			#if($i && ($i.id.equals(${selectedIssueType.id})))
+        				SELECTED
+        			#end
+        		>$i.name</option>
+        	#end
+        </select>
+    </td>
+</tr>
+<tr>
+    <td class="fieldLabelArea">
+        Select the project:
+    </td>
+    <td nowrap>
+        <select name="selectedProject" id="selectedProject" >
+        	#foreach($p in $projects)
+        		<option value="${p.id}"
+        			#if($p && ($p.id.equals(${selectedProject.id})))
+        				SELECTED
+        			#end
+        		>$p.name</option>
+        	#end
+        </select>
+    </td>
+</tr>

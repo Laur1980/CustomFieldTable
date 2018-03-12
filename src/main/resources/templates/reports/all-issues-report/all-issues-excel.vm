@@ -1,0 +1,35 @@
+#disable_html_escaping()
+<table id="allissues-report-table" border="0" cellpadding="3" cellspacing="1" width="100%">
+		<tr class="rowNormal">
+			<th>Key</th>
+			<th>Issue Type</th>	
+			<th>Summary</th>
+			<th>Assignee</th>
+		</tr>
+		#if($issues.size()>0)
+			#foreach($issue in $issues)
+				<tr class="rowNormal">
+					<td>
+						$issue.key
+					</td>
+					<td>
+						$issue.getIssueType().getType() 
+					</td>
+					<td>
+						$issue.summary
+					</td>
+					<td>
+						#if($issue.getAssignee())
+							$issue.getAssignee().getDisplayName()
+						#else
+							NOT ASSIGNED!
+						#end
+					</td>
+				</tr>
+			#end
+		#else
+			<tr class="rowNormal">
+				<td colspan="4">Nothing to show at the moment!</td>
+			</tr>
+		#end
+</table>

@@ -1,0 +1,44 @@
+#disable_html_escaping()
+#set( $count = 2 )
+<table class="aui">
+	<thead>
+		<tr>
+			<th id="No">No</th>
+			<th id="Assignee name">Assignee name</th>
+			<th id="Assignee username">Assignee username</th>
+			#if($projects.size>1)
+				#foreach($project in $projects)
+					<th id="$project.getName()">No of issues for assignee in project ${project.getName()} </th>
+					#set( $count = $count + 1)
+				#end
+			#else
+				<th>$project[0]</th>
+				#set( $count = $count + 1)
+			#end
+		</tr>
+	</thead>
+	<tbody>
+		#if($assignees.size>0)
+			#foreach($assignee in $assignees)
+				<tr>
+					<td headers="No">$velocityCount</td>
+					<td headers="Assignee name">$assignee.getName()</td>
+					<td headers="Assignee username">$assignee.getUsername()</td>
+					#if($projects.size>1)
+						#foreach($project in $projects)
+							<td headers="$project.getName()">$project.getName()</td>
+						#end
+					#else
+						<tr>
+							<td headers>$project[0].getName()</td>
+						</tr>
+					#end
+				</tr>
+			#end
+		#else
+			<tr>
+				<td colspan="$count">No assignees yet</td>
+			</th>
+		#end
+	</tbody>
+</table>

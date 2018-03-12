@@ -35,6 +35,21 @@
     <resource name="edit" type="velocity" location="/templates/customfields/cf-table-2/edit.vm"/>
   </customfield-type>
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CF++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PF++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Change Number Field Value for a certain IssueType field -->
+  <workflow-function key="loop-through-issues-and-change-field-value-pf" name="Loop Through Issues And Change Field Value PF" i18n-name-key="loop-through-issues-and-change-field-value-pf.name" class="ro.etss.telekom.jira.plugin.workflow.postfunctions.LoopThroughIssuesAndChangeFieldValuePFFactory">
+    <description key="loop-through-issues-and-change-field-value-pf.description">It iterates through a chosen issue types and changes a certain file to a predetermined value</description>
+    <function-class>ro.etss.telekom.jira.plugin.workflow.postfunctions.LoopThroughIssuesAndChangeFieldValuePF</function-class>
+      
+    <orderable>true</orderable>
+    <unique>false</unique>
+    <deletable>true</deletable>
+    
+    <resource type="velocity" name="view" location="templates/postfunctions/loop-through-issues-and-change-field-value-pf.vm"/>  	
+    <resource type="velocity" name="input-parameters" location="templates/postfunctions/loop-through-issues-and-change-field-value-pf-input.vm"/>
+    <resource type="velocity" name="edit-parameters" location="templates/postfunctions/loop-through-issues-and-change-field-value-pf-input.vm"/>   
+  </workflow-function>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PF++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
   <!-- ++++++++++++++++++++++++++++++ WebWork +++++++++++++++++++++++++++++++++++++++ -->
   <webwork1 key="table-configuration-action" name="TableConfigurationAction" i18n-name-key="table-configuration-action.name">
     <description key="table-configuration-action.description">The action for editing a table custom field</description>
@@ -47,4 +62,50 @@
     </actions>
   </webwork1>
   <!-- ++++++++++++++++++++++++++++++ WebWork +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++ Reports +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Report all the issues for a project -->
+  <report name="All Issues Report" i18n-name-key="all-issues-report.name" key="all-issues-report" class="ro.etss.jira.plugin.jira.reports.AllIssuesReport">
+    <description key="all-issues-report.description">This report module shows details of issues from a specific project</description>
+    <resource name="view" type="velocity" location="/templates/reports/all-issues-report/all-issues.vm"/>
+    <resource name="excel" type="velocity" location="/templates/reports/all-issues-report/all-issues-excel.vm"/>
+    <resource name="i18n" type="i18n" location="AllIssuesReport"/>
+    <label key="all-issues-report.label"/>
+    <!-- the properties of this report which the user must select before running it -->
+    <properties>
+      <property>
+        <key>projectId</key>
+        <name>report.allissues.project.name</name>
+        <description>report.allissues.project.description</description>
+        <type>select</type>
+        <values class="ro.etss.jira.plugin.jira.reports.ProjectValueGenerator"/>
+      </property>
+    </properties>
+  </report>
+  <!-- Issues Per Assignee Statistic In All Projects  -->
+   <report name="Issues Per Assignee In All Projects" i18n-name-key="issues-per-assignee-in-all-projects.name" key="issues-per-assignee-in-all-projects" class="ro.etss.jira.plugin.jira.reports.IssuesPerAssigneeInAllProjects">
+    <description key="issues-per-assignee-in-all-projects.description">Issues Per Assignee In All Projects Report Module</description>
+    <resource name="view" type="velocity" location="/templates/reports/issues-per-assignee-in-all-projects/view.vm"/>
+    <resource name="i18n" type="i18n" location="IssuesPerAssigneeInAllProjects"/>
+    <label key="issues-per-assignee-in-all-projects.label"></label>
+    <properties>
+        <property>
+            <key>projectId</key>
+            <name>report.concepts.version</name>
+            <description>report.timetracking.version.description</description>
+            <type>multiselect</type>
+            <values class="com.atlassian.jira.portal.MultiProjectValueGenerator"/>
+        </property>
+    </properties>
+  </report>
+  <!-- ++++++++++++++++++++++++++++++ Reports +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++ JQL +++++++++++++++++++++++++++++++++++++++ -->
+  <jql-function name="Projects Function" i18n-name-key="projects-function.name" key="projects-function" class="ro.etss.jira.plugin.jira.jql.ProjectsFunction">
+    <description key="projects-function.description">The Projects Function Plugin</description>
+    <!-- The name of the function -->
+    <fname>projects</fname>
+    <!-- Whether this function returns a list or a singlet value -->
+    <list>true</list>
+  </jql-function>
+  <!-- ++++++++++++++++++++++++++++++ JQL +++++++++++++++++++++++++++++++++++++++ -->
+ 
 </atlassian-plugin>

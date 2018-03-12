@@ -1,0 +1,12 @@
+This post function should be place after the create issue! It changes the value of "Number Field" CustomField, if present, in an incremental manner!
+#*
+	${selectedIssueType.getName()} issue type was selected for the ${selectedProject.getName()} project.<br/><br/>
+	#if($issues && $issues.size()>0)
+		Issues of ${selectedIssueType.getName()} from ${selectedProject.getName()} project:
+		<ol>
+			#foreach($i in $issues)
+				<li id="$id.id">$i.getSummary() with number: $i.getNumber()</li>
+			#end
+		</ol>
+	#end
+*#

@@ -1,0 +1,39 @@
+#disable_html_escaping()
+<table class="aui">
+	<thead>
+		<tr>
+			<th id="key">Key</th>
+			<th id="issuetype">Issue Type</th>
+			<th id="summary">Summary</th>	
+			<th id="assignee">Assignee</th>
+		</tr>
+	</thead>
+	<tbody>
+		#if($issues.size() > 0)
+			#foreach($issue in $issues)
+				<tr>
+					<td headers="key">
+						<a href="/browse/$issue.key">$issue.key</a>
+					</td>
+					<td headers="issuetype">
+						$issue.getIssueType().getType() 
+					</td>
+					<td headers="summary">
+						$issue.summary
+					</td>
+					<td headers="assignee">
+						#if($issue.getAssignee())
+							$issue.getAssignee().getDisplayName()
+						#else
+							NOT ASSIGNED!
+						#end
+					</td>
+				</tr>
+			#end
+		#else
+			<tr>
+				<td colspan="4">Nothing to show at the moment!</td>
+			</tr>
+		#end
+	</tbody>
+</table>
